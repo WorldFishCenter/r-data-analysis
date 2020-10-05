@@ -5,6 +5,7 @@ auth/*
 ## R & Rstudio
 .Rhistory
 .RData
+.Rproj.user
 .Rproj.user/
 .Rapp.history
 .RData
