@@ -2,15 +2,17 @@ name: Run-Drake-Workflow
 
 on:
   push:
-    branches: [ $default-branch ]
+    branches:
+      - master
   pull_request:
-    branches: [ $default-branch ]
+    branches:
+      - master
 
 jobs:
 
   build-container:
-    runs-on: ubuntu-latest
+    name: Build docker container
+    runs-on: ubuntu-20.04
     steps:
-      - name: Build docker container
-        uses: actions/chechout@v2
-        run: docker build . --file Dockerfile --tag r-env:$(date +%s)
+      - uses: actions/chechout@v2
+      - run: docker build . --file Dockerfile --tag r-env:$(date +%s)
