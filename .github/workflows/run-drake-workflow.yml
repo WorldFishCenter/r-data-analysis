@@ -14,5 +14,5 @@ jobs:
     name: Build docker container
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/chechout@v2
+      - uses: actions/checkout@v2
       - run: docker build . --file Dockerfile --tag r-env:$(date +%s)
