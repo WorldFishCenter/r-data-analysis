@@ -8,10 +8,8 @@ on:
 
 jobs:
 
-  build:
+  build-container:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Build docker image
       - uses: actions/chechout@v2
       - run: docker build . --file Dockerfile --tag r-env:$(date +%s)
