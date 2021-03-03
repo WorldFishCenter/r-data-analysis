@@ -11,13 +11,12 @@ on:
 jobs:
 
   build-container:
-    name: Build docker container
+    name: Run workflow
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Build docker image
-        # run: docker build . --file Dockerfile --tag r-env:$(date +%s)
-        run: docker-compose up --build -d
-      - name: Check running images
-        run: docker ps -a
+        run: docker build . --file Dockerfile --tag rstudio_image
+      - name: Run Drake workflow
+        run: docker run -v $(pwd):/home -w /home --name rstudio_container rstudio_image Rscript main.R
