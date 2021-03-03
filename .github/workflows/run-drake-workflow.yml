@@ -14,5 +14,10 @@ jobs:
     name: Build docker container
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
-      - run: docker build . --file Dockerfile --tag r-env:$(date +%s)
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Build docker image
+        # run: docker build . --file Dockerfile --tag r-env:$(date +%s)
+        run: docker-compose up --build -d
+      - name: Check running images
+        run: docker ps -a
