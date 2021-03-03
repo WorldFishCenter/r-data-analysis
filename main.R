@@ -9,7 +9,11 @@ f <- lapply(list.files(path = here::here("R"), full.names = TRUE,
 
 # Plan analysis ------------------------------------------------------------
 
-full_plan <- rbind()
+test_plan <- drake_plan(
+  test_target = 0,
+)
+
+full_plan <- rbind(test_plan)
 
 # Execute plan ------------------------------------------------------------
 
