@@ -21,9 +21,11 @@ jobs:
       - name: Build image with cache
         uses: whoan/docker-build-with-cache-action@v5
         with:
-          push_image_and_stages: false
-          image_name: rstudio
-          dockerfile: Dockerfile
+          username: $GITHUB_ACTOR
+          password: "${{ secrets.GITHUB_TOKEN }}"
+          registry: docker.pkg.github.com
+          image_name: custom_rstudio
+          image_tag: $GITHUB_SHA
 
       - name: Run Drake workflow
-        run: docker run -v $(pwd):/home -w /home --name rstudio_container rstudio Rscript main.R
+        run: docker run -v $(pwd):/home -w /home --name rstudio_container custom_rstudio Rscript main.R
