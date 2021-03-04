@@ -19,6 +19,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build image with cache
+        id: build_docker
         uses: whoan/docker-build-with-cache-action@v5
         with:
           username: $GITHUB_ACTOR
@@ -27,4 +28,4 @@ jobs:
           image_name: custom_rstudio
 
       - name: Run Drake workflow
-        run: docker run -v $(pwd):/home -w /home --name rstudio_container custom_rstudio Rscript main.R
+        run: docker run -v $(pwd):/home -w /home --name rstudio_container ${{ steps.build_docker.outputs.FULL_IMAGE_NAME }} Rscript main.R
