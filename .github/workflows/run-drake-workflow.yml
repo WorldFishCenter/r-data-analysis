@@ -25,7 +25,6 @@ jobs:
           password: "${{ secrets.GITHUB_TOKEN }}"
           registry: docker.pkg.github.com
           image_name: custom_rstudio
-          image_tag: $GITHUB_SHA
 
       - name: Run Drake workflow
         run: docker run -v $(pwd):/home -w /home --name rstudio_container custom_rstudio Rscript main.R
