@@ -27,5 +27,5 @@ jobs:
           registry: docker.pkg.github.com
           image_name: custom_rstudio
 
-      - name: Run Drake workflow
-        run: docker run -v $(pwd):/home -w /home --name rstudio_container ${{ steps.build_docker.outputs.FULL_IMAGE_NAME }} Rscript main.R
+      - name: Run Targets workflow
+        run: docker run -v $(pwd):/home -w /home --name rstudio_container ${{ steps.build_docker.outputs.FULL_IMAGE_NAME }} make
