@@ -1,4 +1,4 @@
 .PHONY: run_main
 
 run_main:
-	Rscript main.R
+	Rscript -e "targets::tar_make()"
