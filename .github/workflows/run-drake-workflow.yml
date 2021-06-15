@@ -17,6 +17,10 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v2
+        
+      - name: Get repository name
+        run: echo ::set-env name=REPOSITORY_NAME::$(echo "$GITHUB_REPOSITORY" | awk -F / '{print $2}' | sed -e "s/:refs//")
+        shell: bash
 
       - name: Build image with cache
         id: build_docker
@@ -25,7 +29,7 @@ jobs:
           username: $GITHUB_ACTOR
           password: "${{ secrets.GITHUB_TOKEN }}"
           registry: docker.pkg.github.com
-          image_name: custom_rstudio
+          image_name: $REPOSITORY_NAME
 
       - name: Run Targets workflow
         run: docker run -v $(pwd):/home -w /home --name rstudio_container ${{ steps.build_docker.outputs.FULL_IMAGE_NAME }} make
